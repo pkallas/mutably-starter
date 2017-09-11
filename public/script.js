@@ -1,13 +1,20 @@
 console.log('Sanity Check: JS is working!');
 
 $(document).ready(function () {
+  // Declare all htmlElements that will be targeted
   const htmlElements = {
     seeAllPokemon: $('#see-all-pokemon'),
     seeOnePokemon: $('#searchForPokemonSubmit'),
     listGroup: $('.list-group'),
     pokemonTable: $('#pokemon-table'),
   };
+  // Add a click event listener to the see-all-pokemon button
   htmlElements.seeAllPokemon.click(function () {
+    // Check to see if the data has already been fetched
+    if (htmlElements.pokemonTable.find('td').length > 0) {
+      return;
+    };
+    // If not, fetch the data and add it to the table
     fetch('http://mutably.herokuapp.com/pokemon')
     .then(pokemonData => pokemonData.json())
     .then(formattedPokemonData => {
@@ -21,8 +28,6 @@ $(document).ready(function () {
             <td>${index.image}</td>
           </tr>`);
         });
-        console.log(formattedPokemonData);
-        console.log('This is happening');
       }
     })
     .catch(error => console.log('Oh no: ' + error));
