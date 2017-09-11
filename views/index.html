@@ -13,10 +13,22 @@
         <a class="navbar-brand" href="/">Mutably Front-end</a>
       </nav>
       <div class="panel panel-default">
-        <div class="panel-heading">[Your Chosen Resource]</div>
-        <ul class="list-group">
-          <!-- your resource items here -->
-        </ul>
+        <div class="panel-heading">[Pokemon API]</div>
+        <button id='see-all-pokemon'>See All Pokemon</button>
+        <form action='/'>
+          Search For Pokemon: <input type='text' name='searchForPokemon'>
+          <input id='searchForPokemonSubmit' type='submit' value='Submit'>
+        </form>
+        <table class="list-group">
+          <thead>
+            <th>Name</th>
+            <th>Pokedex #</th>
+            <th>Evolves From</th>
+            <th>Image</th>
+          </thead>
+          <tbody id="pokemon-table">
+          </tbody>
+        </table>
       </div>
     </div>
   </body>
