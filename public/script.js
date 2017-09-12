@@ -33,23 +33,23 @@ $(document).ready(function () {
     // Next, obtain the form data
     let formData = $('form').serializeArray();
     // Next, fetch the pokemon data, and add the data that matches the submitted name to the table
-    // After the fetch is completed, clear all forms
-    fetch('http://mutably.herokuapp.com/pokemon')
+    // After the fetch is completed, clear the search form
+    fetch(`http://mutably.herokuapp.com/pokemon/${formData[0].value}`)
     .then(pokemonData => pokemonData.json())
     .then(parsedPokemonData => {
-      for (var index in parsedPokemonData) {
-        let allPokemonData = parsedPokemonData[index];
-        let filteredPokemonData = allPokemonData.filter(index => index.name === formData[0].value);
-        htmlElements.pokemonTable.append(`<tr id=${filteredPokemonData[0].name}>
-          <td>${filteredPokemonData[0].name}</td>
-          <td>${filteredPokemonData[0].pokedex}</td>
-          <td>${filteredPokemonData[0].evolves_from}</td>
-          <td>${filteredPokemonData[0].image}</td>
+      htmlElements.pokemonTable.append(`<tr id=${parsedPokemonData.name}>
+        <td>${parsedPokemonData._id}</td>
+        <td><button class="edit-button">Edit</button>${parsedPokemonData.name}</td>
+        <td><button class="edit-button">Edit</button>${parsedPokemonData.pokedex}</td>
+        <td><button class="edit-button">Edit</button>${parsedPokemonData.evolves_from}</td>
+        <td><img src=${parsedPokemonData.image}></img></td>
         </tr>`);
-      }
+      $('form')[0].reset();
+      console.log(htmlElements.seeAllPokemon);
     })
     .catch(error => {
       htmlElements.pokemonTable.append(`<tr id=no-such-pokemon>
+      <td>That Pokemon doesn't exist. Try again</td>
       <td>That Pokemon doesn't exist. Try again</td>
       <td>That Pokemon doesn't exist. Try again</td>
       <td>That Pokemon doesn't exist. Try again</td>
@@ -67,10 +67,6 @@ $(document).ready(function () {
     clearTable();
     // Next, obtain the form data
     let formData = $('form').serializeArray();
-    console.log(formData[1].value);
-    console.log(formData[2].value);
-    console.log(formData[3].value);
-    console.log(formData[4].value);
     // Next, use fetch to post the data to http://mutably.herokuapp.com/pokemon
     fetch('http://mutably.herokuapp.com/pokemon', {
       method: 'post',
@@ -85,8 +81,11 @@ $(document).ready(function () {
       })
     })
     .then(responseToCreation => {
+      // Next, get the updated list of Pokemon
       console.log(responseToCreation);
       getAllPokemon();
+      // Finally, clear the forms that were filled out
+      $('form')[1].reset();
     });
   });
 
@@ -103,26 +102,17 @@ $(document).ready(function () {
       for (var index in parsedPokemonData) {
         let allPokemonData = parsedPokemonData[index];
         allPokemonData.forEach(index => {
-          fetch(index.image, { mode: 'no-cors', header: { 'Access-Control-Allow-Origin': '*', }, })
-          .then(response => response.blob())
-          .then(imageBlob => $('img').attr({ src: URL.createObjectURL(imageBlob), }))
-          .then(parsedImage => {
             htmlElements.pokemonTable.append(`<tr id=${index.name}>
-              <td>${index.name}</td>
-              <td>${index.pokedex}</td>
-              <td>${index.evolves_from}</td>
-              <td>${parsedImage}</td>
+              <td>${index._id}</td>
+              <td><button class="edit-button">Edit</button>${index.name}</td>
+              <td><button class="edit-button">Edit</button>${index.pokedex}</td>
+              <td><button class="edit-button">Edit</button>${index.evolves_from}</td>
+              <td><img src=${index.image}></img></td>
             </tr>`);
-          })
-          .catch(error => console.log('Oh no: ' + error));
-        });
+          });
       }
     })
     .catch(error => console.log('Oh no: ' + error));
   };
 
-  // Create a function to empty the forms
-  function clearAllForms() {
-    $('form').serializeArray().forEach(index => index.value = '');
-  };
 });
