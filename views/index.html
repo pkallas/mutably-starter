@@ -14,10 +14,17 @@
       </nav>
       <div class="panel panel-default">
         <div class="panel-heading">[Pokemon API]</div>
-        <button id='see-all-pokemon'>See All Pokemon</button>
-        <form action='/'>
-          Search For Pokemon: <input type='text' name='searchForPokemon'>
-          <input id='searchForPokemonSubmit' type='submit' value='Submit'>
+        <button id="see-all-pokemon">See All Pokemon</button>
+        <form action="/">
+          Search For Pokemon: <input type="text" name="searchForPokemon">
+          <input id="searchForPokemonSubmit" type="submit" value="Submit">
+        </form>
+        <form action="/">
+          Pokemon Name: <input type="text" name="newPokemonName">
+          Pokedex Number: <input type="text" name="newPokemonPokedexNumber">
+          Evolves From: <input type="text" name="newPokemonEvolvesFrom">
+          Pokemon Image: <input type="text" name="newPokemonImage">
+          <input id="createNewPokemonSubmit" type="submit" value="Create New Pokemon">
         </form>
         <table class="list-group">
           <thead>
