@@ -12,7 +12,7 @@ $(document).ready(function () {
   // Add a click event listener to the see-all-pokemon button
   htmlElements.seeAllPokemon.click(function () {
     // Check to see if a user has searched for one pokemonTable
-    if (htmlElements.pokemonTable.find('td').length === 4) {
+    if (htmlElements.pokemonTable.find('td').length === 5) {
       // If yes, clear the table to skip over the next check
       clearTable();
     };
@@ -39,13 +39,12 @@ $(document).ready(function () {
     .then(parsedPokemonData => {
       htmlElements.pokemonTable.append(`<tr id=${parsedPokemonData.name}>
         <td>${parsedPokemonData._id}</td>
-        <td><button class="edit-button">Edit</button>${parsedPokemonData.name}</td>
-        <td><button class="edit-button">Edit</button>${parsedPokemonData.pokedex}</td>
-        <td><button class="edit-button">Edit</button>${parsedPokemonData.evolves_from}</td>
+        <td>${parsedPokemonData.name}<input class="edit-form" type="text" value=${parsedPokemonData.name}></input><button class="edit-button">Edit</button><button class="save-button">Save</button><button class="delete-button">Delete</button></td>
+        <td>${parsedPokemonData.pokedex}<input class="edit-form" type="text" value=${parsedPokemonData.pokedex}></input><button class="edit-button">Edit</button><button class="save-button">Save</button><button class="delete-button">Delete</button></td>
+        <td>${parsedPokemonData.evolves_from}<input class="edit-form" type="text" value=${parsedPokemonData.evolves_from}></input><button class="edit-button">Edit</button><button class="save-button">Save</button><button class="delete-button">Delete</button></td>
         <td><img src=${parsedPokemonData.image}></img></td>
         </tr>`);
       $('form')[0].reset();
-      console.log(htmlElements.seeAllPokemon);
     })
     .catch(error => {
       htmlElements.pokemonTable.append(`<tr id=no-such-pokemon>
@@ -104,15 +103,15 @@ $(document).ready(function () {
         allPokemonData.forEach(index => {
             htmlElements.pokemonTable.append(`<tr id=${index.name}>
               <td>${index._id}</td>
-              <td><button class="edit-button">Edit</button>${index.name}</td>
-              <td><button class="edit-button">Edit</button>${index.pokedex}</td>
-              <td><button class="edit-button">Edit</button>${index.evolves_from}</td>
+              <td>${index.name}<input class="edit-form" type="text" value=${index.name}></input><button class="edit-button">Edit</button><button class="save-button">Save</button><button class="delete-button">Delete</button></td>
+              <td>${index.pokedex}<input class="edit-form" type="text" value=${index.pokedex}></input><button class="edit-button">Edit</button><button class="save-button">Save</button><button class="delete-button">Delete</button></td>
+              <td>${index.evolves_from}<input class="edit-form" type="text" value=${index.evolves_from}></input><button class="edit-button">Edit</button><button class="save-button">Save</button><button class="delete-button">Delete</button></td>
               <td><img src=${index.image}></img></td>
             </tr>`);
           });
       }
     })
-    .catch(error => console.log('Oh no: ' + error));
+    .catch(error => console.log('Error ==> ' + error));
   };
 
 });
