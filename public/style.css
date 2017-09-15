@@ -6,3 +6,46 @@
 .edit-form {
   display: none;
 }
+
+img {
+  height: 7em;
+  width: auto;
+}
+
+button {
+  width: auto;
+  height: auto;
+}
+
+#hide-all-pokemon-arrow {
+  position: relative;
+  top: 630px;
+  cursor: pointer;
+}
+
+#search-for-pokemon-submit {
+  position: relative;
+  left: 250px;
+  bottom: 80px;
+}
+
+#create-new-pokemon-submit {
+  position: relative;
+  left: 250px;
+  bottom: 80px;
+}
+
+/*#pokeball-strip {
+  width: 500px;
+  height: auto;
+}*/
+
+#see-all-pokemon {
+  position: relative;
+  left: 250px;
+}
+
+#intro-paragraph {
+  background-color: #bbdefb;
+  text: white;
+}

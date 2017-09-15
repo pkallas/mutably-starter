@@ -4,11 +4,11 @@ $(document).ready(function () {
   // Declare all htmlElements that will be targeted
   const htmlElements = {
     seeAllPokemon: $('#see-all-pokemon'),
-    hideAllPokemon: $('#hide-all-pokemon'),
-    seeOnePokemon: $('#searchForPokemonSubmit'),
+    hideAllPokemon: $('#hide-all-pokemon-arrow'),
+    seeOnePokemon: $('#search-for-pokemon-submit'),
     listGroup: $('.list-group'),
     pokemonTable: $('#pokemon-table'),
-    createNewPokemon: $('#createNewPokemonSubmit'),
+    createNewPokemon: $('#create-new-pokemon-submit'),
   };
 
   // Add a click event listener to the see-all-pokemon button
@@ -19,7 +19,7 @@ $(document).ready(function () {
     getAllPokemon();
   });
 
-  // Add a click event listener to the hide-all-pokemon button
+  // Add a click event listener to the hide-all-pokemon div
   htmlElements.hideAllPokemon.click(function () {
     clearTable();
   });
@@ -38,11 +38,11 @@ $(document).ready(function () {
     .then(pokemonData => pokemonData.json())
     .then(parsedPokemonData => {
       htmlElements.pokemonTable.append(`<tr id=${parsedPokemonData._id}>
-        <td><button class="delete-button">Delete</button><span class="pokemon-id">${parsedPokemonData._id}</span></td>
-        <td><button id="edit-button-${parsedPokemonData.name}" class="edit-button">Edit</button><span class="pokemon-name">${parsedPokemonData.name}</span><input id="edit-form-${parsedPokemonData.name}" class="edit-form" type="text" value=${parsedPokemonData.name}></input><button id="save-button-${parsedPokemonData.name}" class="save-button">Save</button></td>
-        <td><button id="edit-button-${parsedPokemonData.pokedex}" class="edit-button">Edit</button><span class="pokedex-number">${parsedPokemonData.pokedex}</span><input id="edit-form-${parsedPokemonData.pokedex}" class="edit-form" type="text" value=${parsedPokemonData.pokedex}></input><button id="save-button-${parsedPokemonData.pokedex}" class="save-button">Save</button></td>
-        <td><button id="edit-button-${parsedPokemonData.evolves_from}" class="edit-button">Edit</button><span class="evolution">${parsedPokemonData.evolves_from}</span><input id="edit-form-${parsedPokemonData.evolves_from}" class="edit-form" type="text" value=${parsedPokemonData.evolves_from}></input><button id="save-button-${parsedPokemonData.evolves_from}" class="save-button">Save</button></td>
-        <td><button id="edit-button-${parsedPokemonData.image}" class="edit-button">Edit</button><img src=${parsedPokemonData.image}></img><input id="edit-form-${parsedPokemonData.image}" class="edit-form" type="text" value=${parsedPokemonData.image}></input><button id="save-button-${parsedPokemonData.image}" class="save-button">Save</button></td>
+        <td><button class="delete-button btn waves-effect waves-light blue lighten-4">Delete</button><span class="pokemon-id">${parsedPokemonData._id}</span></td>
+        <td><button id="edit-button-${parsedPokemonData.name}" class="edit-button btn waves-effect waves-light blue lighten-4">Edit</button><span class="pokemon-name">${parsedPokemonData.name}</span><input id="edit-form-${parsedPokemonData.name}" class="edit-form" type="text" value=${parsedPokemonData.name}></input><button id="save-button-${parsedPokemonData.name}" class="save-button btn waves-effect waves-light blue lighten-4">Save</button></td>
+        <td><button id="edit-button-${parsedPokemonData.pokedex}" class="edit-button btn waves-effect waves-light blue lighten-4">Edit</button><span class="pokedex-number">${parsedPokemonData.pokedex}</span><input id="edit-form-${parsedPokemonData.pokedex}" class="edit-form" type="text" value=${parsedPokemonData.pokedex}></input><button id="save-button-${parsedPokemonData.pokedex}" class="save-button btn waves-effect waves-light blue lighten-4">Save</button></td>
+        <td><button id="edit-button-${parsedPokemonData.evolves_from}" class="edit-button btn waves-effect waves-light blue lighten-4">Edit</button><span class="evolution">${parsedPokemonData.evolves_from}</span><input id="edit-form-${parsedPokemonData.evolves_from}" class="edit-form" type="text" value=${parsedPokemonData.evolves_from}></input><button id="save-button-${parsedPokemonData.evolves_from}" class="save-button btn waves-effect waves-light blue lighten-4">Save</button></td>
+        <td><button id="edit-button-${parsedPokemonData.image}" class="edit-button btn waves-effect waves-light blue lighten-4">Edit</button><img src=${parsedPokemonData.image}></img><input id="edit-form-${parsedPokemonData.image}" class="edit-form" type="text" value=${parsedPokemonData.image}></input><button id="save-button-${parsedPokemonData.image}" class="save-button btn waves-effect waves-light blue lighten-4">Save</button></td>
       </tr>`);
       $('form')[0].reset();
     })
@@ -66,6 +66,11 @@ $(document).ready(function () {
     clearTable();
     // Next, obtain the form data
     let formData = $('form').serializeArray();
+    // Next, check to see if the forms are filled out
+    if (!formData[1].value || !formData[2].value || !formData[3].value || !formData[4].value) {
+      alert('Please fill out all forms');
+      return;
+    };
     // Next, use fetch to post the data to http://mutably.herokuapp.com/pokemon
     fetch('http://mutably.herokuapp.com/pokemon', {
       method: 'post',
@@ -102,11 +107,11 @@ $(document).ready(function () {
         let allPokemonData = parsedPokemonData[index];
         allPokemonData.forEach(index => {
             htmlElements.pokemonTable.append(`<tr id=${index._id}>
-              <td><button class="delete-button">Delete</button><span class="pokemon-id">${index._id}</span></td>
-              <td><button id="edit-button-${index.name}" class="edit-button">Edit</button><span class="pokemon-name">${index.name}</span><input id="edit-form-${index.name}" class="edit-form" type="text" value=${index.name}></input><button id="save-button-${index.name}" class="save-button">Save</button></td>
-              <td><button id="edit-button-${index.pokedex}" class="edit-button">Edit</button><span class="pokedex-number">${index.pokedex}</span><input id="edit-form-${index.pokedex}" class="edit-form" type="text" value=${index.pokedex}></input><button id="save-button-${index.pokedex}" class="save-button">Save</button></td>
-              <td><button id="edit-button-${index.evolves_from}" class="edit-button">Edit</button><span class="evolution">${index.evolves_from}</span><input id="edit-form-${index.evolves_from}" class="edit-form" type="text" value=${index.evolves_from}></input><button id="save-button-${index.evolves_from}" class="save-button">Save</button></td>
-              <td><button id="edit-button-${index.image}" class="edit-button">Edit</button><img src=${index.image}></img><input id="edit-form-${index.image}" class="edit-form" type="text" value=${index.image}></input><button id="save-button-${index.image}" class="save-button">Save</button></td>
+              <td><button class="delete-button btn waves-effect waves-light blue lighten-4">Delete</button><span class="pokemon-id">${index._id}</span></td>
+              <td><button id="edit-button-${index.name}" class="edit-button btn waves-effect waves-light blue lighten-4" btn waves-effect waves-light blue lighten-4>Edit</button><span class="pokemon-name">${index.name}</span><input id="edit-form-${index.name}" class="edit-form" type="text" value=${index.name}></input><button id="save-button-${index.name}" class="save-button btn waves-effect waves-light blue lighten-4">Save</button></td>
+              <td><button id="edit-button-${index.pokedex}" class="edit-button btn waves-effect waves-light blue lighten-4">Edit</button><span class="pokedex-number">${index.pokedex}</span><input id="edit-form-${index.pokedex}" class="edit-form" type="text" value=${index.pokedex}></input><button id="save-button-${index.pokedex}" class="save-button btn waves-effect waves-light blue lighten-4">Save</button></td>
+              <td><button id="edit-button-${index.evolves_from}" class="edit-button btn waves-effect waves-light blue lighten-4">Edit</button><span class="evolution">${index.evolves_from}</span><input id="edit-form-${index.evolves_from}" class="edit-form" type="text" value=${index.evolves_from}></input><button id="save-button-${index.evolves_from}" class="save-button btn waves-effect waves-light blue lighten-4">Save</button></td>
+              <td><button id="edit-button-${index.image}" class="edit-button btn waves-effect waves-light blue lighten-4">Edit</button><img src=${index.image}></img><input id="edit-form-${index.image}" class="edit-form" type="text" value=${index.image}></input><button id="save-button-${index.image}" class="save-button btn waves-effect waves-light blue lighten-4">Save</button></td>
             </tr>`);
           });
       }
