@@ -6,7 +6,7 @@ For goal #383
 2. Change into the directory
 3. Use the following command: git clone https://github.com/pkallas/mutably-starter.git
 4. `npm install`
-5. `npm start` to run (uses nodemon)
+5. `npm run localstart` to run (uses nodemon)
 6. Go to the port specified in the console, most likely http://localhost:3000
 
 ## Alternatively, you can go the heroku site hosting this app and run the entire application from there
