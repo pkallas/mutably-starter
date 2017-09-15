@@ -4,17 +4,24 @@ $(document).ready(function () {
   // Declare all htmlElements that will be targeted
   const htmlElements = {
     seeAllPokemon: $('#see-all-pokemon'),
+    hideAllPokemon: $('#hide-all-pokemon'),
     seeOnePokemon: $('#searchForPokemonSubmit'),
     listGroup: $('.list-group'),
     pokemonTable: $('#pokemon-table'),
     createNewPokemon: $('#createNewPokemonSubmit'),
   };
+
   // Add a click event listener to the see-all-pokemon button
   htmlElements.seeAllPokemon.click(function () {
     // First, clear the table
     clearTable();
     // Then, fetch the pokemon data and add it to the table
     getAllPokemon();
+  });
+
+  // Add a click event listener to the hide-all-pokemon button
+  htmlElements.hideAllPokemon.click(function () {
+    clearTable();
   });
 
   // Add a click event listener for searchForPokemonSubmit button

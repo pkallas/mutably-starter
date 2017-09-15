@@ -3,9 +3,12 @@
   <head>
     <title>Mutably front-end</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
     <link rel="stylesheet" type="text/css" href="/style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="/script.js"></script>
+    <script type="text/javascript" src="materialize.min.js"></script>
   </head>
   <body class="container">
     <div class="col-sm-8 col-sm-offset-2">
@@ -13,8 +16,9 @@
         <a class="navbar-brand" href="/">Mutably Front-end</a>
       </nav>
       <div class="panel panel-default">
-        <div class="panel-heading">[Pokemon API]</div>
+        <div class="panel-heading red lighten-1">[Pokemon API]</div>
         <button id="see-all-pokemon">See All Pokemon</button>
+        <button id="hide-all-pokemon">Hide All Pokemon</button>
         <form action="/">
           Search For Pokemon: <input type="text" name="searchForPokemon">
           <input id="searchForPokemonSubmit" type="submit" value="Submit">
