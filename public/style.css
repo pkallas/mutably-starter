@@ -19,7 +19,7 @@ button {
 
 #hide-all-pokemon-arrow {
   position: relative;
-  top: 630px;
+  top: 620px;
   cursor: pointer;
 }
 
@@ -35,13 +35,9 @@ button {
   bottom: 80px;
 }
 
-/*#pokeball-strip {
-  width: 500px;
-  height: auto;
-}*/
-
 #see-all-pokemon {
   position: relative;
+  bottom: 10px;
   left: 250px;
 }
 
