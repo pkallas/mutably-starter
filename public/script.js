@@ -34,7 +34,7 @@ $(document).ready(function () {
     let formData = $('form').serializeArray();
     // Next, fetch the pokemon data, and add the data that matches the submitted name to the table
     // After the fetch is completed, clear the search form
-    fetch(`http://mutably.herokuapp.com/pokemon/${formData[0].value}`)
+    fetch(`https://mutably.herokuapp.com/pokemon/${formData[0].value}`)
     .then(pokemonData => pokemonData.json())
     .then(parsedPokemonData => {
       htmlElements.pokemonTable.append(`<tr id=${parsedPokemonData._id}>
@@ -71,8 +71,8 @@ $(document).ready(function () {
       alert('Please fill out all forms');
       return;
     };
-    // Next, use fetch to post the data to http://mutably.herokuapp.com/pokemon
-    fetch('http://mutably.herokuapp.com/pokemon', {
+    // Next, use fetch to post the data to https://mutably.herokuapp.com/pokemon
+    fetch('https://mutably.herokuapp.com/pokemon', {
       method: 'post',
       body: JSON.stringify({
         name: formData[1].value,
@@ -100,7 +100,7 @@ $(document).ready(function () {
 
   // Create a function to get all Pokemon
   function getAllPokemon() {
-    fetch('http://mutably.herokuapp.com/pokemon')
+    fetch('https://mutably.herokuapp.com/pokemon')
     .then(pokemonData => pokemonData.json())
     .then(parsedPokemonData => {
       for (var index in parsedPokemonData) {
@@ -143,7 +143,7 @@ $(document).ready(function () {
     let formDataEvolution = $(this).parent().parent().children()[3].childNodes[2].value;
     let formDataImage = $(this).parent().parent().children()[4].childNodes[2].value;
     let pokemonID = $(this).parent().siblings().children()[1].innerText;
-    fetch(`http://mutably.herokuapp.com/pokemon/${pokemonID}`, {
+    fetch(`https://mutably.herokuapp.com/pokemon/${pokemonID}`, {
       method: 'put',
       body: JSON.stringify({
         name: formDataName,
@@ -171,7 +171,7 @@ $(document).ready(function () {
   // to the mutably site, then reload the table with the new data
   $(document).on('click', '.delete-button', function () {
     let pokemonID = $(this).siblings()[0].innerText;
-    fetch(`http://mutably.herokuapp.com/pokemon/${pokemonID}`, { method: 'delete' })
+    fetch(`https://mutably.herokuapp.com/pokemon/${pokemonID}`, { method: 'delete' })
     .then(responseToDelete => {
       console.log(responseToDelete);
       clearTable();
