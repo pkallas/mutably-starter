@@ -12,25 +12,65 @@
   </head>
   <body class="container">
     <div class="col-sm-8 col-sm-offset-2">
+      <div class="card-panel white-text" id="intro-paragraph">This app was built using Learner's Guild <a href="https://mutably.herokuapp.com/">Mutably</a> Heroku app. By filling out the first form,
+        you can search for a Pokemon by it's id. By filling out the remaining forms, you can add a new
+        Pokemon to the table. The "See All Pokemon" button can be used to see all Pokemon in the table, and
+        the arrow to the right of the "See All Pokemon" button can be used to collapse the table.
+      </div>
       <nav class="navbar navbar-default">
-        <a class="navbar-brand" href="/">Mutably Front-end</a>
+        <a class="navbar-brand" href="/">Pokemon Mutably App</a>
       </nav>
       <div class="panel panel-default">
-        <div class="panel-heading red lighten-1">[Pokemon API]</div>
-        <button id="see-all-pokemon">See All Pokemon</button>
-        <button id="hide-all-pokemon">Hide All Pokemon</button>
-        <form action="/">
-          Search For Pokemon: <input type="text" name="searchForPokemon">
-          <input id="searchForPokemonSubmit" type="submit" value="Submit">
-        </form>
-        <form action="/">
-          Pokemon Name: <input type="text" name="newPokemonName">
-          Pokedex Number: <input type="text" name="newPokemonPokedexNumber">
-          Evolves From: <input type="text" name="newPokemonEvolvesFrom">
-          Pokemon Image: <input type="text" name="newPokemonImage">
-          <input id="createNewPokemonSubmit" type="submit" value="Create New Pokemon">
-        </form>
-        <table class="list-group">
+        <div class="panel-heading white-text red darken-1">Pokemon API</div>
+        <div>
+          <i id="hide-all-pokemon-arrow" class="material-icons right">arrow_drop_down</i>
+        </div>
+        <div class="row">
+          <form class="col 12" action="/">
+          <div class="row">
+            <div class="input-field col 12">
+              <input id="search-for-pokemon" type="text" name="searchForPokemon">
+              <label for="search-for-pokemon">Search For Pokemon</label>
+            </div>
+          </div>
+          <button id="search-for-pokemon-submit" class="btn waves-effect waves-light blue lighten-4" type="submit" name="action">Search
+            <i class="material-icons left">send</i>
+          </button>
+          </form>
+        </div>
+        <div class="row">
+          <form class="col 12" action="/">
+            <div class="row">
+              <div class="input-field col 12">
+                <input id="new-pokemon-name" type="text" name="newPokemonName">
+                <label for="new-pokemon-name">Pokemon Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col 12">
+                <input id="new-pokemon-pokedex-number" type="text" name="newPokemonPokedexNumber">
+                <label for="new-pokemon-pokedex-number">Pokedex Number</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col 12">
+                <input id="new-pokemon-evolves-from" type="text" name="newPokemonEvolvesFrom">
+                <label for="new-pokemon-evolves-from">Evolves From</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col 12">
+                <input id="new-pokemon-image" type="text" name="newPokemonImage">
+                <label for="new-pokemon-image">Pokemon Image</label>
+              </div>
+            </div>
+            <button id="create-new-pokemon-submit" class="btn waves-effect waves-light blue lighten-4" type="submit" name="action">Create New Pokemon
+              <i class="material-icons right">send</i>
+            </button>
+          </form>
+        </div>
+        <button id="see-all-pokemon" class="waves-effect waves-light btn blue lighten-4">See All Pokemon</button>
+        <table class="list-group striped red darken-1">
           <thead>
             <th>ID</th>
             <th>Name</th>
